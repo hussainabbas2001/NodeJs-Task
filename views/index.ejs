@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <div id="main">
+
+  <div id="top">
+    <form id="User-Form" action="/createuser" method="post">
+      <h1>Create User Here!</h1>
+      <input name="name" type="text" placeholder="Enter Your Name" required>
+      <input name="email" type="email" placeholder="Enter Your Email"  id="email" required>
+      <input name="Mobile" type="number" placeholder="Enter Your Mobile" id="Mobile-Number" required>
+      <input class="btn-submit" type="submit" value="submit">
+    </form>
+    <div class="scrollit">
+    <table id="table-1" border="1">
+      <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile</th>
+    </tr>
+   <%users.forEach((val)=>{%>
+    <tr>
+    <td><%=val.name%></td>
+    <td><%=val.email%></td>
+    <td><%=val.Mobile%></td>
+  </tr>
+   <%})%>
+    </table>
+  </div>
+  </div>
+
+<hr>
+<div id="bottom">
+    <form id="taskform" action="/createtask" method="post">
+      <h2> Select the User And Create the Task ! </h2>
+      <select name="uname" id="" required>
+        <%users.forEach((val)=>{%>
+          <option value="<%=val.name%>"><%=val.name%></option>
+          <%})%>
+          <input name="tname" type="text" placeholder="Enter Task">
+          <select name="ttype" id="" required>
+            <option value="pending">pending</option>
+            <option value="done">done</option>
+          </select>
+          <input class="btn-submit" type="submit" value="submit">
+      </select>
+    </form>
+    <div class="scrollit">
+    <table id="table-2" border="1">
+      <tr>
+      <th>Name</th>
+      <th>Task</th>
+      <th>Task Type</th>
+    </tr>
+   <%taskdata.forEach((val)=>{%>
+    <tr>
+    <td><%=val.user%></td>
+    <td><%=val.taskname%></td>
+    <td><%=val.tasktype%></td>
+  </tr>
+   <%})%>
+    </table>
+  </div>
+  <button style="padding: 5px 5px ;margin-left: 48%; margin-top: 5%;" onclick="exportxl()">Export excel</button>
+</div>
+
+</div>
+<script src="./javascripts/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
